@@ -357,4 +357,142 @@ bananatruck:truck driving slowly because heaavily loaded
 orangetruck:truck driving slowly because heaavily loaded
 23:sportscar driving
 
+======================
+/BAB 5/
+Operator and Method Overloading Overloading terbagi menjadi 2 yaitu Method Overloading dan Operator Overloading
 
+METHOD OVERLOADING
+Sebuah class yang mempnyai 2 atau lebih method dengan nama yang sama,dan yang membedakan hanya parameternya. Perbedaan yang mencakup paramaternya:
+1.Jumlah Parameternya
+2.Tipe Data dari parameternya
+3.Urutan dari tipe data parameter
+
+Contoh Kodingnya:
+def add(datatype,*args): if datatype=="int": answer = 0 if datatype=="str": answer = "" for x in args: answer = answer + x print(answer)
+#integer add("int",5,6,7,82)
+#string add("str","HI","Geeks")
+
+Output:
+100 HIGeeks
+
+Operator Overloading
+ untuk menambahkan dua objek angka, serta dua objek string. karena + operator kelebihan beban oleh kelas int dan str.Operator overloading, kadang-kadang disebut polimorfisme ad hoc operator, 
+ adalah kasus khusus polimorfisme, di mana operator yang berbeda memiliki implementasi yang berbeda tergantung pada argumen mereka. 
+ Overloading operator umumnya ditentukan oleh bahasa pemrograman, programmer, atau keduanya. Operator Overloading memungkinkan Anda mendefinisikan kembali makna operator Operator 
+
+Contoh Kodingnya:
+print(10 + 400)
+#print("ten" - "sor")
+
+Output:
+410
+(Magic Method) Magic Method adalah kumpulan beberapa Method seperti:
+•	add
+•	sub
+•	mul // floordiv / truediv % mod ** pow << lsfiht
+rsfiht & and ^ xor l or
+
+Contoh kodingnya:
+class Point: def init(self,x=0,y=0): self.x = x self.y = y
+#def __str__(self):
+#    return "((0),(1))".format(self.x,self.y)
+def __str__(self):
+    return "Point object is at ("+str(self.x)+","+str(self.y)+")"
+def __sub__(self,other):
+    x = self.x - other.x
+    y = self.y - other.y
+    return Point(x,y)
+def __add__(self,other):
+    x = self.x + other.x
+    y = self.y + other.y
+    return Point(x,y)
+p1 = Point(2,3) p2 = Point(-1,2) print(p1-p2) print(p1+p2)
+
+Output:
+Point object is at (3,1) Point object is at (1,5)
+
+Contoh Kodingan lainnya:
+class Fraction: def init(self,top,bottom): self.num = top self.den = bottom
+#def show(self):
+#   print( str(self.num)+"/"+str(self.den) )
+def __str__(self):
+    return str(self.num)+"/"+str(self.den)
+def __add__(self,otherfraction):
+    newnum = self.num*otherfraction.den+self.den*otherfraction.num
+    newden = self.den * otherfraction.den
+    return Fraction(newnum,newden)
+def __truediv__(self,otherfraction):
+    newnum = self.num * otherfraction.den
+    newden = self.den * otherfraction.num
+    return Fraction(newnum,newden)
+f = Fraction(2,4)
+#f.show() print(f) f1 = Fraction(1,4) f2 = Fraction(1,2) print(f1+f2) print(f1/f2)
+
+Output:
+2/4 6/8 2/4
+
+======================
+/BAB 6/
+Encapsulation
+
+Encapsulation adalah proses pemaketan data bersama metode-metodenya dimana hal ini bermanfaat untuk menyembeunyikan rincian-rincian implementasi dari pemakai. 
+Dalam sebuah objek yang mengandung variabel-variabel dan method-method, dapat ditentukan hak akses pada sebuah variabel atau method dari objek. 
+Pembungkusan variabel dan method dalam sebuah objek dalam bagian yang terlindungi inilah yang disebut dengan enkapsulasi
+
+Contoh Kodingan (Private Method):
+class Robot(object): def init(self): self.version = 22 def getVersion(self): print(self.version) def setVersion(self,version): self.__version = version
+obj = Robot() obj.getVersion() obj.setVersion(23) obj.getVersion()
+#print(obj.version) #jika tanpa komentar akan eror print(obj._Robotversion) #Harus memasukan nama class karena tidak bisa diakses dari luar class
+
+Output:
+22 23 23
+
+Contoh Lainnya:
+class A(object):
+#public method
+def myPublicMethod(self):
+    return "This is a public method"
+#private method with single underscore
+def _myPrivateMethod(self):
+    return "This is a private method"
+#private method with double underscore
+def __myAnotherPrivateMethod(self):
+    return "This is another private method"
+#nama objek obj1 = A()
+#we can access the public mehod which is cool print(obj1.myPublicMethod())
+#Note that we can also access the private method from outside print(obj1._myPrivateMethod())
+#However, you can still call the double underscore method
+#by appending the class name before method name print(obj1.A__myAnotherPrivateMethod())
+
+Output:
+This is a public method This is a private method This is another private method
+
+Contoh Kodingan(Private Method):
+class Car: def init(self): self.__updateSoftware()
+def drive(self):
+    print ('driving')
+
+def __updateSoftware(self):
+    print ('updating software')
+redcar = Car() redcar.drive()
+#redcar.__updateSoftware() not accesible from object.
+
+Output:
+updating software driving
+
+Contoh Lainnya:
+class Car: __maxspeed = 0 __name = ""
+def __init__(self):
+    self.__maxspeed = 200
+    self.__name = ("Supercar")
+
+def drive(self):
+    print ('driving. maxspeed ' + str(self.__maxspeed))
+
+def setMaxSpeed(self,speed):
+    self.__maxspeed = speed
+redcar = Car() redcar.drive() redcar.maxspeed = 10 # will not change variable because its private redcar.drive() redcar._Carmaxspeed = 10 #Harus menggunakan _class sebelum nama method redcar.drive()
+#Atau bisa menggunakan method redcar.setMaxSpeed(15) redcar.drive()
+
+Output:
+driving. maxspeed 200 driving. maxspeed 200 driving. maxspeed 10 driving. maxspeed 15
